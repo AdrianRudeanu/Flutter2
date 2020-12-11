@@ -50,16 +50,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
     String wantedUrl = baseUrl;
 
-    if(minRating != 0 || genre != 'All'){
+    if (minRating != 0 || genre != 'All') {
       wantedUrl += '?';
     }
 
-    if(minRating != 0){
+    if (minRating != 0) {
       wantedUrl = wantedUrl + 'minimum_rating=' + minRating.toString();
     }
 
-    if(genre != 'All'){
-      if(minRating !=0){
+    if (genre != 'All') {
+      if (minRating != 0) {
         wantedUrl += '&';
       }
       wantedUrl = wantedUrl + 'genre=' + genre;
@@ -136,19 +136,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               minRating = int.parse(newValue).toDouble();
                             });
                           },
-                          items: <String>[
-                            '0',
-                            '1',
-                            '2',
-                            '3',
-                            '4',
-                            '5',
-                            '6',
-                            '7',
-                            '8',
-                            '9',
-                            '10'
-                          ].map<DropdownMenuItem<String>>((String value) {
+                          items: <String>['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+                              .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
@@ -177,8 +166,17 @@ class _MyHomePageState extends State<MyHomePage> {
                               genre = newValue;
                             });
                           },
-                          items: <String>['All', 'Drama', 'Comedy', 'Action','Crime','Sci-Fi','Adventure','War','Family']
-                              .map<DropdownMenuItem<String>>((String value) {
+                          items: <String>[
+                            'All',
+                            'Drama',
+                            'Comedy',
+                            'Action',
+                            'Crime',
+                            'Sci-Fi',
+                            'Adventure',
+                            'War',
+                            'Family'
+                          ].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
@@ -199,42 +197,37 @@ class _MyHomePageState extends State<MyHomePage> {
                   } else {
                     return Expanded(
                         child: ListView.builder(
-                          itemCount: movieList.length,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Card(
-                              child: Row(
-                                children: <Widget>[
-                                  Image.network(movieList[index].imageUrl),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: <Widget>[
-                                        ListTile(
-                                          title:
-                                              Text(movieList[index].title),
-                                          subtitle: Text('' +
-                                              movieList[index]
-                                                  .rating
-                                                  .toString() +
-                                              '/10 \nYear: ' +
-                                              movieList[index]
-                                                  .year
-                                                  .toString()),
-                                        ),
-                                      ],
+                            itemCount: movieList.length,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Card(
+                                child: Row(
+                                  children: <Widget>[
+                                    Image.network(movieList[index].imageUrl),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          ListTile(
+                                            title: Text(movieList[index].title),
+                                            subtitle: Text('' +
+                                                movieList[index].rating.toString() +
+                                                '/10 \nYear: ' +
+                                                movieList[index].year.toString()),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  IconButton(
-                                    icon: const Icon(Icons.info_outline),
-                                    onPressed: () {
-                                      _launchURL(movieList[index].url);
-                                    },
-                                  ),
-                                ],
-                              ),
-                            );
-                          }));
+                                    IconButton(
+                                      icon: const Icon(Icons.info_outline),
+                                      onPressed: () {
+                                        _launchURL(movieList[index].url);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }));
                   }
                 })
           ],

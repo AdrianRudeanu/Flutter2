@@ -1,4 +1,4 @@
-class Movie{
+class Movie {
   final int id;
   final String url;
   final String title;
@@ -10,12 +10,11 @@ class Movie{
 
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
-      id: json['id'],
-      url: json['url'],
-      title: json['title'],
-      rating: json['rating'].toDouble(),
-      imageUrl: json['small_cover_image'],
-      year: json['year']
-    );
+        id: json['id'],
+        url: json['url'],
+        title: json['title'],
+        rating: json['rating'].toDouble(),
+        imageUrl: json['small_cover_image'],
+        year: json['year']);
   }
 }
