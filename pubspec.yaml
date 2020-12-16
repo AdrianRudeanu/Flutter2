@@ -14,6 +14,14 @@ dependencies:
   cupertino_icons: any
   http: ^0.12.2
   url_launcher: ^5.7.10
+  flutter_redux: ^0.6.0
+  redux_thunk: ^0.3.0
+  build_runner: any
+  json_serializable: any
+  built_value_generator: ^7.1.0
+  redux: any
+
+
 
 dev_dependencies:
   flutter_test:
