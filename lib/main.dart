@@ -21,7 +21,7 @@ void main() {
     middleware: appMiddleware.middleware,
   );
 
-  store.dispatch(const GetMovies());
+  store.dispatch(const GetMoviesStart());
   runApp(MyApp(store: store));
 }
 

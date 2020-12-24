@@ -15,10 +15,10 @@ class YtsApi {
     final Response response = await _client.get('https://yts.mx/api/v2/list_movies.json?limit=50');
 
     final List<dynamic> data = jsonDecode(response.body)['data']['movies'];
-    print('got data');
+    //print('got data');
     List<Movie> object = data.map((dynamic json) => Movie.fromJson(json)).toList();
-    print('this is data');
-    print(object[0].toString());
+    //print('this is data');
+    //print(object[0].toString());
     return object;
   }
 }
