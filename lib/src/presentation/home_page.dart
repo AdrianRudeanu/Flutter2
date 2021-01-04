@@ -4,9 +4,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tema_filme/src/containers/movies_container.dart';
-
-import 'package:tema_filme/src/models/movie.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:tema_filme/src/containers/index.dart';
+import 'package:tema_filme/src/models/index.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
                 return Card(
                   child: Row(
                     children: <Widget>[
-                      Image.network(movies[index].imageUrl),
+                      Image.network(movies[index].mediumCover),
                       Expanded(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,

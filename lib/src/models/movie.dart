@@ -1,10 +1,8 @@
-library movie;
+// File created by
+// Lung Razvan <long1eu>
+// on 14/12/2020
 
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:tema_filme/src/models/serializers.dart';
-
-part 'movie.g.dart';
+part of models;
 
 abstract class Movie implements Built<Movie, MovieBuilder> {
   factory Movie([void Function(MovieBuilder b) updates]) = _$Movie;
@@ -25,8 +23,14 @@ abstract class Movie implements Built<Movie, MovieBuilder> {
 
   String get summary;
 
-  @BuiltValueField(wireName: 'small_cover_image')
-  String get imageUrl;
+  @BuiltValueField(wireName: 'background_image')
+  String get background;
+
+  @BuiltValueField(wireName: 'medium_cover_image')
+  String get mediumCover;
+
+  @BuiltValueField(wireName: 'large_cover_image')
+  String get largeCover;
 
   static Serializer<Movie> get serializer => _$movieSerializer;
 }

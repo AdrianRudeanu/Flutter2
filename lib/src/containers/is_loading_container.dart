@@ -1,18 +1,15 @@
+part of containers;
 
+class IsLoadingContainer extends StatelessWidget {
+  const IsLoadingContainer({Key key, @required this.builder}) : super(key: key);
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
-import 'package:tema_filme/src/models/app_state.dart';
-
-
-class IsLoadingContainer extends StatelessWidget{
+  final ViewModelBuilder<bool> builder;
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState,bool>(
-      converter:(Store<AppState> store)=> store.state.isLoading,
-      builder:null
+    return StoreConnector<AppState, bool>(
+      converter: (Store<AppState> store) => store.state.isLoading,
+      builder: builder,
     );
   }
 }

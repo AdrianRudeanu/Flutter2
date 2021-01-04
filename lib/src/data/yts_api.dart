@@ -2,7 +2,10 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:meta/meta.dart';
-import 'package:tema_filme/src/models/movie.dart';
+import 'dart:convert';
+
+import 'package:tema_filme/src/models/index.dart';
+
 
 class YtsApi {
   const YtsApi({@required Client client})
@@ -11,14 +14,23 @@ class YtsApi {
 
   final Client _client;
 
-  Future<List<Movie>> getMovies() async {
-    final Response response = await _client.get('https://yts.mx/api/v2/list_movies.json?limit=50');
+  Future<List<Movie>> getMovies(int page, String quality, List<String> genres, String orderBy) async {
+    final Uri url = Uri(
+      scheme: 'https',
+      host: 'yts.mx',
+      pathSegments: <String>['api', 'v2', 'list_movies.json'],
+      queryParameters: <String, String>{
+        'limit': '3',
+        'page': '$page',
+        'order_by': orderBy,
+        if (quality != null) 'quality': quality,
+        if (genres.isNotEmpty) 'genre': genres.join(','),
+      },
+    );
+
+    final Response response = await _client.get(url);
 
     final List<dynamic> data = jsonDecode(response.body)['data']['movies'];
-    //print('got data');
-    List<Movie> object = data.map((dynamic json) => Movie.fromJson(json)).toList();
-    //print('this is data');
-    //print(object[0].toString());
-    return object;
+    return data.map((dynamic json) => Movie.fromJson(json)).toList();
   }
 }

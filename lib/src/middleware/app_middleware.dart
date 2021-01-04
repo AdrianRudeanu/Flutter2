@@ -1,11 +1,8 @@
 import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
-import 'package:tema_filme/src/actions/get_movies.dart';
-import 'package:tema_filme/src/actions/get_movies.dart';
-import 'package:tema_filme/src/actions/get_movies.dart';
+import 'package:tema_filme/src/actions/index.dart';
 import 'package:tema_filme/src/data/yts_api.dart';
-import 'package:tema_filme/src/models/app_state.dart';
-import 'package:tema_filme/src/models/movie.dart';
+import 'package:tema_filme/src/models/index.dart';
 
 class AppMiddleware {
   const AppMiddleware({@required YtsApi ytsApi})
@@ -14,13 +11,17 @@ class AppMiddleware {
 
   final YtsApi _ytsApi;
 
-  List<Middleware<AppState>> get middleware {
+  /*List<Middleware<AppState>> get middleware {
     return <Middleware<AppState>>[
       _getMoviesMiddleware,
     ];
+  }*/
+
+  Future<void> _getMoviesStart(Store<AppState> store, GetMoviesStart action, NextDispatcher next) async{
+    next(action);
   }
 
-  Future<void> _getMoviesMiddleware(Store<AppState> store, dynamic action, NextDispatcher next) async {
+  /*Future<void> _getMoviesMiddleware(Store<AppState> store, dynamic action, NextDispatcher next) async {
     next(action);
     if (action is! GetMovies) {
       return;
@@ -38,5 +39,5 @@ class AppMiddleware {
       //print(error.error.toString());
       store.dispatch(error);
     }
-  }
+  }*/
 }

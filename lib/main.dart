@@ -3,25 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:http/http.dart';
 import 'package:redux/redux.dart';
-import 'package:tema_filme/src/actions/get_movies.dart';
+import 'package:redux_epics/redux_epics.dart';
+import 'package:tema_filme/src/actions/index.dart';
 import 'package:tema_filme/src/data/yts_api.dart';
-import 'package:tema_filme/src/middleware/app_middleware.dart';
-import 'package:tema_filme/src/models/app_state.dart';
+import 'package:tema_filme/src/epics/app_epics.dart';
+import 'package:tema_filme/src/models/index.dart';
 import 'package:tema_filme/src/presentation/home_page.dart';
 import 'package:tema_filme/src/reducer/reducer.dart';
-
 void main() {
   final Client client = Client();
   final YtsApi api = YtsApi(client: client);
-  final AppMiddleware appMiddleware = AppMiddleware(ytsApi: api);
+  final AppEpics epics = AppEpics(ytsApi: api);
   final AppState initialState = AppState();
   final Store<AppState> store = Store<AppState>(
     reducer,
     initialState: initialState,
-    middleware: appMiddleware.middleware,
+    middleware: <Middleware<AppState>>[
+      EpicMiddleware<AppState>(epics.epics),
+    ],
   );
 
-  store.dispatch(const GetMoviesStart());
+  store.dispatch(GetMovies.start(initialState.page));
   runApp(MyApp(store: store));
 }
 
